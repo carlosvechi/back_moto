@@ -6,6 +6,7 @@ import {
     deletarMoto
 } from './controller.js';
 
+//cria as rotas 
 const router = Router();
 
 router.get('/motos', listarMotos);

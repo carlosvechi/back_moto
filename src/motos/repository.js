@@ -9,16 +9,19 @@ function getAllMotos() {
     });
 }
 
-function createMoto({ modelo, marca, ano, cor, placa, km_atual }) {
+function createMoto({ modelo, marca, ano, cor, placa, km_atual }) { //vai receber um objeto que contém essas informações da moto, como parametro
     return new Promise((resolve, reject) => {
+        //comando para inserir no banco. Os '?' são os campos vázios, esperando os valores
         const sql = `
         INSERT INTO cadastro_motos (modelo, marca, ano, cor, placa, km_atual)
-        VALUES (?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?) 
         `;
 
+        //aqui os dados são realmente enviados
         db.query(sql, [modelo, marca, ano, cor, placa, km_atual], (err, results) => {
-            if (err) return reject(err);
-            resolve(results);
+            //faz uma validação. Se 'err' existe, então algo deu errado. Se err NÃO existe, deu tudo certo.
+            if (err) return reject(err); //se existe, envia um aviso de erro para o controller
+            resolve(results); //se não, envia para o controller o resultado
         });
     });
 }
